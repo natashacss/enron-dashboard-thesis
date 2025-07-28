@@ -6,7 +6,4 @@ scikit-learn
 pyvis
 networkx
 numpy
-json
-pickle
 gdown
-os
