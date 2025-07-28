@@ -8,6 +8,8 @@ import networkx as nx
 from pyvis.network import Network
 import streamlit.components.v1 as components
 import pickle
+import gdown
+import os
 
 st.set_page_config(page_title="Enron Anomaly Dashboard", layout="wide")
 
@@ -23,7 +25,13 @@ def load_graph():
 # Load data
 @st.cache_data
 def load_data():
-    return pd.read_csv("data/enron_anomalies.csv")
+    url = "https://drive.google.com/uc?id=1SayGoQQzHWA0YBoGgNCgk1yBkLxVnXJa"
+    output_path = "data/enron_anomalies.csv"
+
+    if not os.path.exists(output_path):
+        gdown.download(url, output_path, quiet=False)
+
+    return pd.read_csv(output_path)
 
 graph = load_graph()
 df = load_data()
