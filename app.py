@@ -13,6 +13,25 @@ import os
 
 st.set_page_config(page_title="Enron Anomaly Dashboard", layout="wide")
 
+# --- LOGIN PAGE ---
+def check_password():
+    """Simple login with Streamlit secrets"""
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+
+    if not st.session_state.authenticated:
+        st.title("🔒 Login Required 🔒")
+        pwd = st.text_input("Enter password to access the dashboard:", type="password")
+        if st.button("Login"):
+            if pwd == st.secrets["dashboard_password"]:
+                st.session_state.authenticated = True
+                st.success("🎉 Access granted! 🎉")
+            else:
+                st.error("Incorrect password.")
+        st.stop()
+
+check_password()
+
 # Title + description
 st.title("Enron Email Anomaly Dashboard")
 st.markdown("Visualizing communication anomalies using ML models on the Enron email dataset.")
