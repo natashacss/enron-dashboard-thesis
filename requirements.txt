@@ -8,3 +8,5 @@ networkx
 numpy
 json
 pickle
+gdown
+os
